@@ -17,10 +17,12 @@ Everything is provisioned from the command line with `eksctl`, `kubectl`, `helm`
 7. [Verification](#7-verification)
 8. [Troubleshooting (Issues I Hit and Fixed)](#8-troubleshooting-issues-i-hit-and-fixed)
 9. [Cost Management](#9-cost-management)
-10. [Cleanup](#10-cleanup)
-11. [Key Learnings](#11-key-learnings)
-12. [Future Improvements](#12-future-improvements)
-
+10. [Screenshots](#10-screenshots)
+11. [Cleanup](#11-cleanup)
+12. [Key Learnings](#12-key-learnings)
+13. [Future Improvements](#13-future-improvements)
+14. [Acknowlegments](#14-acknowledgements)
+15. [Author](#15-author)
 ---
 
 ## 1. Project Overview
@@ -408,8 +410,54 @@ Tips:
 - Remove load balancers **before** deleting the cluster; they bill hourly.
 
 ---
+---
 
-## 10. Cleanup
+## 10. Screenshots
+
+> All screenshots were taken from the live deployment in `us-east-1`. The AWS account ID has been blurred.
+
+### 1. Live Application
+
+![Robot Shop storefront](screenshots/01-storefront.png)
+*The Robot Shop storefront loaded in the browser through the internet-facing ALB DNS name.*
+
+### 2. EKS Cluster Ready
+
+![Cluster ready](screenshots/02-cluster-ready.png)
+*The cluster `demo-cluster-three-tier` is `ACTIVE`, and both worker nodes are in the `Ready` state.*
+
+### 3. Application Pods
+
+![All pods running](screenshots/03-pods-running.png)
+*All 12 Robot Shop pods (`web`, `cart`, `catalogue`, `user`, `payment`, `shipping`, `ratings`, `dispatch`, `mongodb`, `mysql`, `redis`, `rabbitmq`) are `Running` in the `robot-shop` namespace.*
+
+### 4. Ingress
+
+![Ingress with ALB address](screenshots/04-ingress-address.png)
+*The Ingress receives its ALB DNS name in the `ADDRESS` column.*
+
+### 5. Application Load Balancer
+
+![ALB in AWS console](screenshots/05-alb-console.png)
+*The ALB is `Active` and internet-facing (EC2 → Load Balancers).*
+
+### 6. EKS Cluster in the AWS Console
+
+![EKS cluster in console](screenshots/06-eks-console.png)
+*The cluster shows `Active` status, the Kubernetes version and the managed node group.*
+
+### 7. Controllers and Add-ons
+
+![Load Balancer Controller and EBS CSI driver](screenshots/07-controller-and-ebs-csi.png)
+*The AWS Load Balancer Controller is `2/2` ready, and the EBS CSI driver pods are running in `kube-system`.*
+
+### 8. Target Group Health
+
+![Target group health](screenshots/08-target-group-healthy.png)
+*The ALB target group shows the `web` pod as `healthy`.*
+
+
+## 11. Cleanup
 
 Order matters. Load balancers live inside the VPC but are not part of the CloudFormation stacks, so deleting the cluster first can hang the VPC deletion.
 
@@ -436,7 +484,7 @@ Then, in the console, check CloudFormation (no `eksctl-demo-cluster-three-tier-*
 
 ---
 
-## 11. Key Learnings
+## 12. Key Learnings
 
 - Free-plan accounts restrict EC2 instance types, and an unsuitable choice appears as a node group timeout, not a clear error. Check CloudFormation Events and the Auto Scaling group Activity tab.
 - IRSA (OIDC provider plus IAM role plus service account) is how EKS add-ons and controllers get AWS permissions.
@@ -447,7 +495,7 @@ Then, in the console, check CloudFormation (no `eksctl-demo-cluster-three-tier-*
 
 ---
 
-## 12. Future Improvements
+## 13. Future Improvements
 
 - Add a custom domain with Route 53 and an HTTPS certificate from ACM
 - Move IAM permissions from IRSA to EKS Pod Identity (as recommended by AWS)
@@ -459,12 +507,12 @@ Then, in the console, check CloudFormation (no `eksctl-demo-cluster-three-tier-*
 
 ---
 
-## Acknowledgements
+## 14. Acknowledgements
 
 Application: [Robot Shop](https://github.com/instana/robot-shop), a sample microservices store by Instana.
 
 
-# 👩‍💻 Author
+## 15. 👩‍💻 Author
 
 **Neha V M**
 
