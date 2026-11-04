@@ -1,0 +1,14 @@
+# cluster.yaml
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: demo-cluster-three-tier
+  region: us-east-1
+availabilityZones: ["us-east-1a", "us-east-1b"]
+managedNodeGroups:
+  - name: ng-1
+    instanceTypes: ["m7i-flex.large", "c7i-flex.large"]
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 2
+    volumeSize: 20
