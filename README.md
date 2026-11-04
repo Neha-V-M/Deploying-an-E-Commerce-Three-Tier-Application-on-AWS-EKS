@@ -106,11 +106,6 @@ The application follows a classic **three-tier** design:
 three-tier-architecture-demo/
 ├── cluster.yaml                 # eksctl cluster configuration
 └── EKS/
-    ├── 01-prerequisites.md      # Tools and AWS CLI setup
-    ├── 02-eks-cluster-setup.md  # Cluster creation
-    ├── 03-oidc-IAM.md           # OIDC provider and IAM setup
-    ├── 04-alb-configuration.md  # AWS Load Balancer Controller
-    ├── 05-ebs-csi-driver.md     # EBS CSI driver
     └── helm/
         ├── Chart.yaml
         ├── values.yaml
