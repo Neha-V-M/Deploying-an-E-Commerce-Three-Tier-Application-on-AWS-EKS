@@ -414,7 +414,7 @@ Tips:
 
 ## 10. Screenshots
 
-> All screenshots were taken from the live deployment in `us-east-1`. The AWS account ID has been blurred.
+> All screenshots were taken from the live deployment in `us-east-1`.
 
 ### 1. Live Application
 
